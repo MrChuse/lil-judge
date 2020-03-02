@@ -9,6 +9,10 @@ import orm
 
 import uuid
 
+import random
+import string
+import hashlib
+
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -77,3 +81,42 @@ def logout():
     g.session.delete(g.token)
 
     return {}
+
+@app.route('/users/', methods=['POST'])
+@use_sql_session
+@authentication_only
+def users():
+    r = request.get_json()
+    r['username'], r['password']
+
+    salt = ''.join(random.sample(string.printable, 20))
+    hash = hashlib.sha512()
+    hash.update((password + salt).encode())
+    salted_password = hash.hexdigest()
+
+    g.session.add(User(
+        username=username,
+        firstname=first_name,
+        lastname=last_name,
+        password=salted_password,
+        salt=salt
+    ))
+
+
+@app.route('/users/<id>', methods=['GET', 'PUT', 'DELETE'])
+@use_sql_session
+@authentication_only
+def get_user(id):
+    return g.session.query(User).filter(User.id == id).one_or_none()
+     
+
+
+
+
+
+
+
+
+
+
+

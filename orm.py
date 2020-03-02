@@ -1,5 +1,5 @@
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, UniqueConstraint, ForeignKey
+from sqlalchemy import Column, Integer, String, UniqueConstraint, ForeignKey, Date 
 from sqlalchemy.orm import relationship
 
 
@@ -35,3 +35,21 @@ class Token(Base):
     userid = Column(Integer, ForeignKey('users.id'))
 
     user = relationship("User")
+
+
+class Contests(Base):
+    __tablename__ = 'contests'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    createdBy = Column(String, ForeignKey('users.username'))
+    startDate = Column(Date)
+    endDate = Column(Date)
+
+
+class ContestMembership(Base):
+    __tablename__ = 'contestMembership'
+
+    contestid = Column(Integer, ForeignKey('contests.id'), primary_key=True)
+    userid = Column(Integer, ForeignKey('users.id'), primary_key=True)
+    role = Column(String, primary_key=True)

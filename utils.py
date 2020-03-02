@@ -12,8 +12,6 @@ def create_user(username, password, first_name, last_name):
     hash.update((password + salt).encode())
     salted_password = hash.hexdigest()
 
-    session = get_session()
-
     session.add(User(
         username=username,
         firstname=first_name,
@@ -21,8 +19,6 @@ def create_user(username, password, first_name, last_name):
         password=salted_password,
         salt=salt
     ))
-
-    session.commit()
 
 
 def get_user(username, password):

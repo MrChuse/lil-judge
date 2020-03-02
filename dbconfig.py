@@ -2,10 +2,10 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 config = {
-    'user': 'postgres',
-    'password': 'password',
-    'host': 'localhost',
-    'port': 15432,
+    'user': '837_aleksej_lukashevichus',
+    'password': 'qwe123#',
+    'host': '10.55.163.88',
+    'port': 5432,
     'echo': True
 }
 

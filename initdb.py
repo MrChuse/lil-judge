@@ -7,4 +7,4 @@ engine = get_engine()
 Base.metadata.drop_all(engine)
 Base.metadata.create_all(engine)
 
-create_user('test', 'test', 'John', 'Doe')
+#create_user('test', 'test', 'John', 'Doe')
